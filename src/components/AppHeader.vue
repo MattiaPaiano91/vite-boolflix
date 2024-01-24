@@ -1,8 +1,9 @@
 <script>
+import { data } from '../store.js';
 export default {
     data() {
         return {
-            
+            data
         };
     },
     methods: {
@@ -13,10 +14,14 @@ export default {
 
 <template>
     <header>
-        HEADER
+        <form @submit.prevent="$emit('userSearch')" action="">
+                <input v-model="data.userSearch" type="text">
+                <button>Cerca</button>
+        </form>
     </header>
 </template>
 
 <style lang="scss" scoped>
 @use "../assets/scss/main.scss" as *;
+
 </style>

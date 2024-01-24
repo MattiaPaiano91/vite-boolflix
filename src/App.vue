@@ -2,11 +2,14 @@
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
 import AppFooter from './components/AppFooter.vue';
+import axios from 'axios';
+import { data } from './store.js';
+
 
 export default {
     data() {
         return {
-
+            data
         };
     },
     components: {
@@ -15,24 +18,39 @@ export default {
         AppFooter
     },  
     methods: {
-
+        startSearch(){
+             axios
+            .get('https://api.themoviedb.org/3/search/movie', {
+                    // params: queryParams
+                    params: {
+                        api_key: 'b2a56f38f368b892b40ea39dbe61874e',
+                        query: this.data.userSearch
+                    }
+                })
+            .then((response) => {
+                console.log(response.data.results);
+                this.data.movie = response.data.results
+            })
+        }
+    },
     }
-}
 </script>
-
+            
 <template>
-    <h1>
-        Mia App
-    </h1>
+   
+    <AppHeader @userSearch="startSearch()" />
 
-    <AppHeader />
-
-    <AppMain />
+    <AppMain :result="this.data.movie"/>
 
     <AppFooter />
+
 </template>
 
 <style lang="scss">
     @use "assets/scss/main" as *;
     @import "assets/scss/partials/reset";
 </style>
+        
+                
+                
+
