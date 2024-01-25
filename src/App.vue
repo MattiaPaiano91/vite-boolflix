@@ -58,7 +58,7 @@ export default {
     <AppMain 
         :resultMovie="this.data.movie"
         :resultTV="this.data.tv" />
-    <AppFooter />
+    
 
 </template>
 
