@@ -51,12 +51,13 @@ export default {
 
 <template>
    
-    <AppHeader @userSearch="startSearchMovie(), startSearchTv()" />
+    <AppHeader 
+        @userSearch="startSearchMovie(), startSearchTv()" 
+    />
 
     <AppMain 
-    :resultMovie="this.data.movie"
-    :resultTV="this.data.tv" />
-
+        :resultMovie="this.data.movie"
+        :resultTV="this.data.tv" />
     <AppFooter />
 
 </template>
@@ -65,6 +66,7 @@ export default {
     @use "assets/scss/main" as *;
     @import "assets/scss/partials/reset";
 </style>
+
         
                 
             

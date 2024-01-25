@@ -41,23 +41,25 @@ export default {
                     <img :src="rightFlag(elem.original_language)" :alt=elem.original_language>
                 </li>
                 <li>vote:{{ elem.vote_average}}</li>
+                <li><img :src="'https://image.tmdb.org/t/p/w342' + elem.poster_path" :alt="elem.original_title"></li>
             </ul>
         </div>
         <div v-for="(series,j) in resultTV">
             <ul>
-                <li>Title series:{{ series.name }}</li>
+                <li>SERIES Title:{{ series.name }}</li>
                 <li>Original title:{{ series.original_name}}</li>
                 <li>
                     <img :src="rightFlag(series.original_language)" :alt=series.original_language>
                 </li>
                 <li>vote:{{ series.vote_average}}</li>
+                <li><img :src="'https://image.tmdb.org/t/p/w342' + series.poster_path" :alt="series.original_name"></li>
             </ul>
         </div>
     </main>
 </template>
 
-           
-
 <style lang="scss" scoped>
 @use "../assets/scss/main.scss" as *;
 </style>
+
+           
