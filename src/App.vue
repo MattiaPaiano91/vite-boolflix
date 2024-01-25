@@ -17,7 +17,7 @@ export default {
         AppFooter
     },  
     methods: {
-        startSearch(){
+        startSearchMovie(){
              axios
             .get('https://api.themoviedb.org/3/search/movie', {
                     params: {
@@ -30,6 +30,19 @@ export default {
                 this.data.movie = response.data.results
             })
         },
+         startSearchTv(){
+             axios
+            .get('https://api.themoviedb.org/3/search/tv', {
+                    params: {
+                        api_key: 'b2a56f38f368b892b40ea39dbe61874e',
+                        query: this.data.userSearch,
+                    }
+                })
+            .then((response) => {
+                console.log(response.data.results);
+                this.data.tv = response.data.results
+            })
+        },
     },
     }
 
@@ -38,9 +51,11 @@ export default {
 
 <template>
    
-    <AppHeader @userSearch="startSearch()" />
+    <AppHeader @userSearch="startSearchMovie(), startSearchTv()" />
 
-    <AppMain :result="this.data.movie" />
+    <AppMain 
+    :resultMovie="this.data.movie"
+    :resultTV="this.data.tv" />
 
     <AppFooter />
 

@@ -7,16 +7,9 @@ export default {
             data
         };
     },
-    // methods: {
-    //        searchFlag(){
-    //              axios
-    //          .get("https://flagsapi.com/EN/flat/64.png", {
-    //              })
-    //          .then((response) => {
-    //              console.log('flag'+ response);
-    //          })
-    //      }
-    // }
+    methods: {
+         
+    }
 }
 </script>
                   

@@ -5,6 +5,7 @@ export const data = reactive({
   movie: [],
   language: "",
   flag: [],
+  tv:[]
 });
  
 

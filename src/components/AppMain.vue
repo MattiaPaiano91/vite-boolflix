@@ -14,7 +14,7 @@ export default {
             if(flag == 'en'){
                flagUrl += 'gb-eng.png';
             }else if(flag == 'ja'){
-               flagUrl = 'jp.png';
+               flagUrl += 'jp.png';
             }
             else{
                 flagUrl += flag + '.png'
@@ -23,7 +23,8 @@ export default {
         }
     },
     props:{
-        result:Array
+        resultMovie:Array,
+        resultTV:Array
     },
 }
            
@@ -32,7 +33,7 @@ export default {
 
 <template>
     <main>
-        <div v-for="(elem,i) in result" >
+        <div v-for="(elem,i) in resultMovie" >
             <ul>
                 <li>Title:{{ elem.title }}</li>
                 <li>Original title:{{ elem.original_title}}</li>
@@ -40,6 +41,16 @@ export default {
                     <img :src="rightFlag(elem.original_language)" :alt=elem.original_language>
                 </li>
                 <li>vote:{{ elem.vote_average}}</li>
+            </ul>
+        </div>
+        <div v-for="(series,j) in resultTV">
+            <ul>
+                <li>Title series:{{ series.name }}</li>
+                <li>Original title:{{ series.original_name}}</li>
+                <li>
+                    <img :src="rightFlag(series.original_language)" :alt=series.original_language>
+                </li>
+                <li>vote:{{ series.vote_average}}</li>
             </ul>
         </div>
     </main>
