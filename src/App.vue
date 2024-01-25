@@ -5,7 +5,6 @@ import AppFooter from './components/AppFooter.vue';
 import axios from 'axios';
 import { data } from './store.js';
 
-
 export default {
     data() {
         return {
@@ -21,26 +20,27 @@ export default {
         startSearch(){
              axios
             .get('https://api.themoviedb.org/3/search/movie', {
-                    // params: queryParams
                     params: {
                         api_key: 'b2a56f38f368b892b40ea39dbe61874e',
-                        query: this.data.userSearch
+                        query: this.data.userSearch,
                     }
                 })
             .then((response) => {
                 console.log(response.data.results);
                 this.data.movie = response.data.results
             })
-        }
+        },
     },
     }
+
 </script>
-            
+                
+
 <template>
    
     <AppHeader @userSearch="startSearch()" />
 
-    <AppMain :result="this.data.movie"/>
+    <AppMain :result="this.data.movie" />
 
     <AppFooter />
 
@@ -52,5 +52,7 @@ export default {
 </style>
         
                 
+            
+                   
                 
 
