@@ -84,7 +84,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   background-color: rgb(30, 30, 30);
-  height: calc(100% - 100px);
+  min-height: calc(100vh - 100px);
   .card-container {
     position: relative;
     width: 342px;
