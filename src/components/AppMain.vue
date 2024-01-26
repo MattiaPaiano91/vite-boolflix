@@ -4,7 +4,8 @@ export default {
   data() {
     return {
       data,
-      offcanvasCounter:null
+      offcanvasCounter: 0,
+      offcanvasCounterTV : 0
     };
   },
   methods: {
@@ -19,8 +20,14 @@ export default {
       }
       return flagUrl;
     },
-    offcanvasInfo(i){
-      this.offcanvasCounter = i
+    offcanvasInfo(i) {
+      
+
+        this.offcanvasCounter = i;
+    
+    },
+    offcanvasInfoTv(j){
+      this.offcanvasCounterTV = j;
     }
   },
   props: {
@@ -29,128 +36,197 @@ export default {
   },
 };
 </script>
+      
 
 <template>
-  <main class="text-bg-dark">
+  <div class="container-fluid text-bg-dark">
 
-
-    <!-- le card sono contentute in un tag <a> che scatena l'offcanvas -->
-
-    <div class="card-container m-5" v-for="(elem, i) in resultMovie" :key="i">
-      <a
-        data-bs-toggle="offcanvas"
-        href="#offcanvasExample"
-        role="button"
-        aria-controls="offcanvasExample"
-        @click="offcanvasInfo(i)"
-      >
-        <div class="card">
-          <img
-            :src="'https://image.tmdb.org/t/p/w342' + elem.poster_path"
-            :alt="elem.original_title"
-          />
-        </div>
-        <div class="card-information">
-          <ul>
-            <li>Title:{{ elem.title }}</li>
-            <li>Original title:{{ elem.original_title }}</li>
-            <li>
-              <img
-                :src="rightFlag(elem.original_language)"
-                :alt="elem.original_language"
-              />
-            </li>
-            <li>vote:{{ elem.vote_average }}</li>
-            <li class="overview">{{ elem.overview }}</li>
-          </ul>
-        </div>
-      </a>
-    </div>
-    <div class="card-container m-5" v-for="(series, j) in resultTV" :key="j">
-      <a
-        data-bs-toggle="offcanvas"
-        href="#offcanvasExample"
-        role="button"
-        aria-controls="offcanvasExample"
-      >
-      <div class="card">
-        <img
-          :src="'https://image.tmdb.org/t/p/w342' + series.poster_path"
-          :alt="series.original_name"
-        />
-      </div>
-      <div class="card-information">
-        <ul>
-          <li>SERIES Title:{{ series.name }}</li>
-          <li>Original title:{{ series.original_name }}</li>
-          <li>
+    <main>
+      <!-- le card sono contentute in un tag <a> che scatena l'offcanvas -->
+      
+        <!-- card che contengono i film -->
+      <div class="card-container m-3" v-for="(elem, i) in resultMovie" :key="i">
+        <a
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample"
+          @click="offcanvasInfo(i)"
+        >
+          <div class="card">
             <img
-              :src="rightFlag(series.original_language)"
-              :alt="series.original_language"
+              :src="'https://image.tmdb.org/t/p/w300' + elem.poster_path"
+              :alt="elem.original_title"
             />
-          </li>
-          <li>vote:{{ series.vote_average }}</li>
-          <li class="overview">{{ series.overview }}</li>
-        </ul>
+          </div>
+          <div class="card-information">
+            <ul class="p-2">
+              <li>Title:{{ elem.title }}</li>
+              <li>Original title:{{ elem.original_title }}</li>
+              <li>
+                <img
+                  :src="rightFlag(elem.original_language)"
+                  :alt="elem.original_language"
+                />
+              </li>
+              <li>vote:{{ elem.vote_average }}</li>
+            </ul>
+          </div>
+        </a>
       </div>
-      </a>
-    </div>
-        <!-- offcanvas che contiene le info del film/serie tv -->
-    <div
-      class="offcanvas offcanvas-start text-bg-dark "
-      tabindex="-1"
-      id="offcanvasExample"
-      aria-labelledby="offcanvasExampleLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
+
+         <!-- card che contengono le Serie tv -->
+
+      <div class="card-container m-3" v-for="(series, j) in resultTV" :key="j">
+        <a
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample"
+           @click="offcanvasInfoTv(j)"
+        >
+          <div class="card">
+            <img
+              :src="'https://image.tmdb.org/t/p/w300' + series.poster_path"
+              :alt="series.original_name"
+            />
+          </div>
+          <div class="card-information">
+            <ul class="p-2">
+              <li>SERIES Title:{{ series.name }}</li>
+              <li>Original title:{{ series.original_name }}</li>
+              <li>
+                <img
+                  :src="rightFlag(series.original_language)"
+                  :alt="series.original_language"
+                />
+              </li>
+              <li>vote:{{ series.vote_average }}</li>
+            </ul>
+          </div>
+        </a>
       </div>
-      <div class="offcanvas-body text-bg-dark ">
-        <div class="text-white" v-if="resultMovie && resultMovie[offcanvasCounter]">
-          {{ resultMovie[offcanvasCounter].original_title }}
-        </div>
-        <div class="dropdown mt-3">
+
+      <!-- 
+        offcanvas che contiene le info del film/serie tv
+       -->
+
+      <div
+        class="offcanvas offcanvas-start text-bg-dark"
+        tabindex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+      >
+        <div class="offcanvas-header">
+          <h3 class="offcanvas-title" id="offcanvasExampleLabel">overview</h3>
           <button
-            class="btn btn-secondary dropdown-toggle"
             type="button"
-            data-bs-toggle="dropdown"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body text-bg-dark">
+          <div
+            class="text-white"
+          
           >
-            Dropdown button
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
+            <ul class="p-0">
+              <li class="my-2">
+                <h5 class="d-inline">Title:</h5>
+                <p v-if="resultMovie && resultMovie[offcanvasCounter]">
+                  {{ resultMovie[offcanvasCounter].title }}
+                </p>
+                <!-- <p v-if="resultTV && resultTV[offcanvasCounterTV]">
+                  {{ resultTV[offcanvasCounterTV].name }}
+                </p> -->
+              </li>
+              <li class="my-2">
+                <h5 class="d-inline">Original Title:</h5>
+                <p v-if="resultMovie && resultMovie[offcanvasCounter]">
+                 {{ resultMovie[offcanvasCounter].original_title }}</p>
+               <!-- {{ resultTV[offcanvasCounterTV].original_name }} -->
+              </li>
+              <li>
+                <div v-if="resultMovie && resultMovie[offcanvasCounter]">
+                  <img
+                    :src=" 
+                      'https://image.tmdb.org/t/p/w342' +
+                      resultMovie[offcanvasCounter].poster_path
+                    "
+                    alt=""
+                  />
+              </div>
+                
+               <!--  <img
+                  :src="
+                    'https://image.tmdb.org/t/p/w342' +
+                    resultTV[offcanvasCounterTV].poster_path
+                  "
+                  alt=""
+                /> -->
+              </li>
+              <li class="mt-3">
+                <p v-if="resultMovie && resultMovie[offcanvasCounter]">
+                 Overview: {{ resultMovie[offcanvasCounter].overview }}</p>
+                <!--{{ resultTV[offcanvasCounterTV].overview }} -->
+              </li>
+            </ul>
+          </div>
+          <!-- <div class="dropdown mt-3">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+            >
+              Dropdown button
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </div> -->
         </div>
       </div>
-    </div>
-    <!-- fine off canvas -->
-  </main>
+
+      <!-- fine off canvas -->
+
+    </main>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 @use "../assets/scss/main.scss" as *;
+img{
+  border: none;
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+.card{
+  border: none;
+}
+
+
 li {
   list-style: none;
 }
-
+.offcanvas-title {
+  color: red;
+}
 main {
   font-family: "Bebas Neue", sans-serif;
   display: flex;
   flex-wrap: wrap;
-  
+  width: 1200px;
+  margin: 0 auto;
   min-height: calc(100vh - 100px);
   .card-container {
     position: relative;
     width: 342px;
     height: 500px;
+    border: none;
     &:hover .card {
       opacity: 0.5;
     }
@@ -166,10 +242,9 @@ main {
       left: 0;
       width: 100%;
       height: 100%;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: 500;
       color: white;
-      padding-right: 15px;
       img {
         width: 20px;
         height: 10px;
