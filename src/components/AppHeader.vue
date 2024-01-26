@@ -22,14 +22,6 @@ export default {
       <div class="col-6 d-flex align-items-center justify-content-end ">
         <form class="h-75" @submit.prevent="$emit('userSearch')" action="">
           <div class="input-group mb-3 d-flex align-items-center">
-            <input
-              v-model="data.userSearch"
-              type="text"
-              class="form-control "
-              placeholder="Cerca Serie tv o Film"
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2"
-            />
             <button
               class="btn btn-outline-secondary"
               type="submit"
@@ -37,6 +29,14 @@ export default {
             >
               Cerca
             </button>
+            <input
+            v-model="data.userSearch"
+            type="text"
+            class="form-control "
+            placeholder="Cerca Serie tv o Film"
+            aria-label="Recipient's username"
+            aria-describedby="button-addon2"
+            />
           </div>
         </form>
       </div>
