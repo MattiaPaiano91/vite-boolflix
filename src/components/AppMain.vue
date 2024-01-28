@@ -62,13 +62,15 @@ export default {
             role="button"
             aria-controls="offcanvasExample"
             @click="offcanvasInfo(i)"
-            v-if="elem.backdrop_path"
+            
           >
             <div class="card">
               <img
                 :src="'https://image.tmdb.org/t/p/w300' + elem.poster_path"
                 :alt="elem.original_title"
+                 v-if="elem.poster_path"
               />
+              <img v-else src="https://static-00.iconduck.com/assets.00/netflix-icon-icon-2048x2048-yj41gpvr.png" alt="">
             </div>
             <div class="card-information">
               <ul class="p-2">
@@ -76,6 +78,7 @@ export default {
                 <li>Original title:{{ elem.original_title }}</li>
                 <li>
                   <img
+                 
                     :src="rightFlag(elem.original_language)"
                     :alt="elem.original_language"
                   />
@@ -106,13 +109,15 @@ export default {
             role="button"
             aria-controls="offcanvasExample"
             @click="offcanvasInfoTv(j)"
-            v-if="series.backdrop_path"
+            
           >
             <div class="card">
               <img
+              v-if="series.poster_path"
                 :src="'https://image.tmdb.org/t/p/w300' + series.poster_path"
                 :alt="series.original_name"
               />
+              <img v-else src="https://static-00.iconduck.com/assets.00/netflix-icon-icon-2048x2048-yj41gpvr.png" alt="">
             </div>
             <div class="card-information">
               <ul class="p-2">
@@ -120,6 +125,7 @@ export default {
                 <li>Original title:{{ series.original_name }}</li>
                 <li>
                   <img
+                    
                     :src="rightFlag(series.original_language)"
                     :alt="series.original_language"
                   />
