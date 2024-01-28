@@ -4,8 +4,8 @@ export default {
   data() {
     return {
       data,
-      offcanvasCounter: 0,
-      offcanvasCounterTV : 0
+      offcanvasCounter: null,
+      offcanvasCounterTV : null
     };
   },
   methods: {
@@ -22,13 +22,17 @@ export default {
     },
     offcanvasInfo(i) {
       
-
-        this.offcanvasCounter = i;
-    
-    },
-    offcanvasInfoTv(j){
-      this.offcanvasCounterTV = j;
-    }
+      this.offcanvasCounter = i;
+      this.offcanvasCounterTV = null
+  
+  },
+  offcanvasInfoTv(j){
+    this.offcanvasCounterTV = j;
+    this.offcanvasCounter = null
+  }
+    // le due funzioni impostano il vaolre del rispettivo counter al rispettivo indice di iterazione, in modo da poter usare la variabile 
+    // come indice per estrapolare determinati dati nella text interpolation. Impostano anche a null il valore dell'altra variabile in modo 
+    // che il v-if nell'offcanvas mi nasconda i dati indesiderati
   },
   props: {
     resultMovie: Array,
@@ -47,6 +51,7 @@ export default {
         <!-- card che contengono i film -->
       <div class="card-container m-3" v-for="(elem, i) in resultMovie" :key="i">
         <a
+        title="Scopri di più"
           data-bs-toggle="offcanvas"
           href="#offcanvasExample"
           role="button"
@@ -79,6 +84,7 @@ export default {
 
       <div class="card-container m-3" v-for="(series, j) in resultTV" :key="j">
         <a
+        title="Scopri di più"
           data-bs-toggle="offcanvas"
           href="#offcanvasExample"
           role="button"
@@ -137,15 +143,17 @@ export default {
                 <p v-if="resultMovie && resultMovie[offcanvasCounter]">
                   {{ resultMovie[offcanvasCounter].title }}
                 </p>
-                <!-- <p v-if="resultTV && resultTV[offcanvasCounterTV]">
+                <p v-if="resultTV && resultTV[offcanvasCounterTV]">
                   {{ resultTV[offcanvasCounterTV].name }}
-                </p> -->
+                </p>
               </li>
               <li class="my-2">
                 <h5 class="d-inline">Original Title:</h5>
                 <p v-if="resultMovie && resultMovie[offcanvasCounter]">
                  {{ resultMovie[offcanvasCounter].original_title }}</p>
-               <!-- {{ resultTV[offcanvasCounterTV].original_name }} -->
+                 <p v-if="resultTV && resultTV[offcanvasCounterTV]">
+                  {{ resultTV[offcanvasCounterTV].original_name }}
+                </p>
               </li>
               <li>
                 <div v-if="resultMovie && resultMovie[offcanvasCounter]">
@@ -158,37 +166,28 @@ export default {
                   />
               </div>
                 
-               <!--  <img
+             <div v-if="resultTV && resultTV[offcanvasCounterTV]">
+                   <img
                   :src="
                     'https://image.tmdb.org/t/p/w342' +
                     resultTV[offcanvasCounterTV].poster_path
                   "
                   alt=""
-                /> -->
+                    />
+             </div>
               </li>
-              <li class="mt-3">
+              <li class="mt-3 overview">
                 <p v-if="resultMovie && resultMovie[offcanvasCounter]">
                  Overview: {{ resultMovie[offcanvasCounter].overview }}</p>
-                <!--{{ resultTV[offcanvasCounterTV].overview }} -->
+                <p v-if="resultTV && resultTV[offcanvasCounterTV]">
+                  Overview: {{ resultTV[offcanvasCounterTV].overview }} 
+                </p>
               </li>
             </ul>
           </div>
-          <!-- <div class="dropdown mt-3">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-            >
-              Dropdown button
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </div> -->
         </div>
       </div>
+
 
       <!-- fine off canvas -->
 
